@@ -1,16 +1,22 @@
 
+require('dotenv').config();
+console.log(process.env.SESSION_SECRET);
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var userRoute = require('./routes/user.routes');
+var userRoute = require('./routes/user.route');
+var authRoute = require('./routes/auth.route');
+var cookieParser = require('cookie-parser');
 
 var port = 3000;
+
 
 app.set('view engine', 'pug');
 app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 
 app.get('/', function(req, res){
@@ -19,7 +25,10 @@ app.get('/', function(req, res){
 	});
 });
 
+app.use(express.static('public'));
+
 app.use('/users', userRoute);
+app.use('/auth', authRoute);
 
 app.listen(port, function(){
 	console.log('Server listening on port ' + port );

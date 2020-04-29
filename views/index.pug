@@ -1,3 +1,7 @@
-h1 Hello! #{name}
+extends ./layouts/common
 
-a(href="/Users") Users
+block content
+	.d-flex.justify-content-center
+		h1 Hello! #{name}
+	.d-flex.justify-content-center
+		img(src="/images/codersX.jpg")

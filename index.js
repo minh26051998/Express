@@ -7,6 +7,7 @@ var app = express();
 var userRoute = require('./routes/user.route');
 var authRoute = require('./routes/auth.route');
 var cookieParser = require('cookie-parser');
+var productRoute = require('./routes/product.route');
 
 var port = 3000;
 
@@ -29,6 +30,7 @@ app.use(express.static('public'));
 
 app.use('/users', userRoute);
 app.use('/auth', authRoute);
+app.use('/products', productRoute);
 
 app.listen(port, function(){
 	console.log('Server listening on port ' + port );

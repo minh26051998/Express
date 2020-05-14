@@ -14,6 +14,7 @@ var tranferRoute = require('./routes/transfer.route');
 var authMiddleware = require('./middlewares/auth.middleware');
 var csurf = require('csurf');
 var mongoose = require('mongoose');
+var apiProductRoute = require('./api/routes/product.route');
 
 mongoose.connect(process.env.MONGO_URL);
 
@@ -28,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(sessionMiddleware);
-app.use(csurf({cookie: true}));
+// app.use(csurf({cookie: true}));
 
 app.get('/', function(req, res){
 	res.render('index', {
@@ -43,6 +44,7 @@ app.use('/auth', authRoute);
 app.use('/products', productRoute);
 app.use('/cart', cartRoute);
 app.use('/transfer',authMiddleware.requireAuth, tranferRoute);
+app.use('/api/products', apiProductRoute);
 
 
 app.listen(port, function(){

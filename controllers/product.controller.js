@@ -13,7 +13,7 @@ module.exports.index = async function(req, res){
 	// res.render('products/index', {
 	// 	// products: db.get('products').value().slice(start, end)
 	// 	products: db.get('products').drop(drop).take(perPage).value()
-	// });
+	// });z
 	var products = await Product.find();
 		res.render('products/index', {
 			products: products
